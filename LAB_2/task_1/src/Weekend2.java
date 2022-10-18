@@ -14,6 +14,14 @@ public class Weekend2 {
         week.put(6, "Friday");
         week.put(7, "WEEKEND");
         String day = week.get(i);
-        System.out.println("Today is " + day + ".");
+
+
+        if (i != 1 && i != 7) {
+            i = (i + 6) % 7;
+            int daysToWeekend = 5 - i;
+            System.out.println("Today is " + day + ", "+daysToWeekend+" days until weekend.");
+        }else{
+            System.out.println("It's weekend!");
+        }
     }
 }
