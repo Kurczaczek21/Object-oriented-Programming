@@ -9,6 +9,8 @@ public class Weekend {
             i = (i + 6) % 7;
             int daysToWeekend = 5 - i;
             System.out.println("Liczba dni do weekendu: " + daysToWeekend);
+        }else{
+            System.out.println("JEST WEEKEND :))))");
         }
     }
 }
