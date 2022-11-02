@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7288db01-97ec-4607-9310-4015dc06b992" name="Changes" comment="" />
+    <list default="true" id="7288db01-97ec-4607-9310-4015dc06b992" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/LAB_4/.idea/LAB_4.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LAB_4/LAB_4/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LAB_4/LAB_4/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LAB_4/LAB_4/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LAB_4/LAB_4/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LAB_4/LAB_4/LAB_4.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LAB_4/LAB_4/src/LineCounter.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +44,7 @@
       <workItem from="1665827547296" duration="70000" />
       <workItem from="1665925415316" duration="33000" />
       <workItem from="1666109564830" duration="124000" />
+      <workItem from="1667391552228" duration="35000" />
     </task>
     <servers />
   </component>
