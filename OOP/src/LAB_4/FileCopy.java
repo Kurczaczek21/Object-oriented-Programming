@@ -41,9 +41,7 @@ public class FileCopy {
                 System.out.println("Brak wymaganych uprawnień do katalogu " + dst.getName() + ".");
                 System.exit(1);
             }
-
-            String filename = String.valueOf(Paths.get(src.getName()).getFileName());
-            dst = new File(dst.getName() + "/" + filename);
+            pathOut = Paths.get(destanationFileLocation+"\\"+args[0]);
         }
 
         try {

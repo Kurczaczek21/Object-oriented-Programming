@@ -26,7 +26,7 @@ public class LineCounterPane {
             System.exit(0);
         }
         int lines = 0;
-        while (reader.readLine() != null) {
+        while(reader.ready()){
             lines++;
         }
 
