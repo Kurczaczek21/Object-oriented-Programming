@@ -1,8 +1,6 @@
 package LAB_4;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,7 +15,7 @@ public class FileAndURLCopy {
         }
 
         String sourceFileLocation = "C:\\Users\\Mateusz\\IdeaProjects\\java college\\data\\" + args[0];
-        Path pathIn = Paths.get(sourceFileLocation);
+//        Path pathIn = Paths.get(sourceFileLocation);
         String destanationFileLocation = "C:\\Users\\Mateusz\\IdeaProjects\\java college\\data\\" + args[1];
         Path pathOut = Paths.get(destanationFileLocation);
 
@@ -55,13 +53,12 @@ public class FileAndURLCopy {
         try {
             if (isValidURL(args[0])) {
                 URL url = new URL(args[0]);
-                InputStream is = new URL(args[0]).openStream();
-                String x =url.getPath();
-                pathIn = Paths.get(x);
-                System.out.println("SSSSssssssssss");
-                Files.copy(is, pathOut, StandardCopyOption.REPLACE_EXISTING);
+                BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+                OutputStream os = new FileOutputStream(destanationFileLocation);
+
             } else {
-                Files.copy(pathIn, pathOut, StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("sss");
+//                Files.copy(pathIn, pathOut, StandardCopyOption.REPLACE_EXISTING);
             }
         } catch (IOException e){
                 e.printStackTrace();
