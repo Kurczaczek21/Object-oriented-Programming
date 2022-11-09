@@ -2,6 +2,7 @@ package LAB_4;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,7 +23,7 @@ public class FileAndURLCopy {
 
         File src = new File(sourceFileLocation), dst = new File(destanationFileLocation);
 
-        if (!isValidURL(args[0])) {
+        if (!isValidURL(args[0])) { // Jest plikiem:
             if (!src.exists()) {
                 System.out.println("Plik " + src.getName() + " nie istnieje.");
                 System.exit(1);
@@ -38,36 +39,34 @@ public class FileAndURLCopy {
                 System.exit(1);
             }
         }
-
-        if (!src.exists()) {
-            System.out.println("Plik " + src.getName() + " nie istnieje.");
-            System.exit(1);
-        }
-
-        if (src.isDirectory()) {
-            System.out.println("Plik " + src.getName() + " jest katalogiem.");
-            System.exit(1);
-        }
-
-        if (!src.canRead()) {
-            System.out.println("Brak dostępu do pliku " + src.getName() + ".");
-            System.exit(1);
-        }
-
-        if (dst.isDirectory()) {
+        if (dst.isDirectory()) { // Jest katalogiem:
             if (!dst.canWrite()) {
                 System.out.println("Brak wymaganych uprawnień do katalogu " + dst.getName() + ".");
                 System.exit(1);
             }
             pathOut = Paths.get(destanationFileLocation+"\\"+args[0]);
         }
+        if (dst.exists() && !dst.canWrite()) {
+            System.out.println("Nie można nadpisać pliku " + dst.getName() + ".");
+            System.exit(1);
+        }
+
 
         try {
-            Files.copy(pathIn, pathOut, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            e.printStackTrace();
+            if (isValidURL(args[0])) {
+                URL url = new URL(args[0]);
+                InputStream is = new URL(args[0]).openStream();
+                String x =url.getPath();
+                pathIn = Paths.get(x);
+                System.out.println("SSSSssssssssss");
+                Files.copy(is, pathOut, StandardCopyOption.REPLACE_EXISTING);
+            } else {
+                Files.copy(pathIn, pathOut, StandardCopyOption.REPLACE_EXISTING);
+            }
+        } catch (IOException e){
+                e.printStackTrace();
+            }
         }
-    }
     public static boolean isValidURL(String urlString) {
         try {
             URL url = new URL(urlString);

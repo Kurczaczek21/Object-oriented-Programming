@@ -43,6 +43,11 @@ public class FileCopy {
             }
             pathOut = Paths.get(destanationFileLocation+"\\"+args[0]);
         }
+        if (dst.exists() && !dst.canWrite()) {
+            System.out.println("Nie można nadpisać pliku " + dst.getName() + ".");
+            System.exit(1);
+        }
+
 
         try {
             Files.copy(pathIn, pathOut, StandardCopyOption.REPLACE_EXISTING);
