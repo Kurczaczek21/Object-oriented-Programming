@@ -15,27 +15,18 @@ public class WordCounter {
         }
         String fileName = "";
         String arguments ="";
-        boolean l = true;
-        boolean c = true;
-        boolean w = true;
+        boolean doAll = false;
+
         for(int i =0;i< args.length;i++){
-            System.out.println(args[i]);
-            if (!args[i].contains("-")){
-                fileName=args[i];
+            if (!args[i].contains("-")) {
+                fileName = args[i];
                 continue;
-            }
-            if (!args[i].contains("l")) {
-                l = false;
-            }
-            if (!args[i].contains("c")) {
-                c = false;
-            }
-            if (!args[i].contains("w")){
-                w = false;
             }
             arguments+=args[i];
         }
-        System.out.println(arguments);
+        if(arguments.length() == 0){
+            doAll = true;
+        }
 
         String fileLocation = "C:\\Users\\Mateusz\\IdeaProjects\\java college\\data\\" + fileName;
         BufferedReader reader = null;
@@ -62,13 +53,13 @@ public class WordCounter {
             characters += Files.readAllLines(Paths.get(fileLocation)).get(i).length();
         }
 
-        if(l) {
+        if(arguments.contains("l") || doAll) {
             System.out.println("wierszy: " + lines);
         }
-        if(c) {
+        if(arguments.contains("c") || doAll) {
             System.out.println("znaków: " + characters);
         }
-        if(w) {
+        if(arguments.contains("w") || doAll) {
             System.out.println("słów: " + words);
         }
     }
