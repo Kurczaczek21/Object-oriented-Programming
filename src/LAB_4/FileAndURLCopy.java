@@ -1,7 +1,10 @@
 package LAB_4;
 
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,7 +18,7 @@ public class FileAndURLCopy {
         }
 
         String sourceFileLocation = "C:\\Users\\Mateusz\\IdeaProjects\\java college\\data\\" + args[0];
-//        Path pathIn = Paths.get(sourceFileLocation);
+        Path pathIn = Paths.get(sourceFileLocation);
         String destanationFileLocation = "C:\\Users\\Mateusz\\IdeaProjects\\java college\\data\\" + args[1];
         Path pathOut = Paths.get(destanationFileLocation);
 
@@ -53,12 +56,10 @@ public class FileAndURLCopy {
         try {
             if (isValidURL(args[0])) {
                 URL url = new URL(args[0]);
-                BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-                OutputStream os = new FileOutputStream(destanationFileLocation);
+                copy(url,dst);
 
             } else {
-                System.out.println("sss");
-//                Files.copy(pathIn, pathOut, StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(pathIn, pathOut, StandardCopyOption.REPLACE_EXISTING);
             }
         } catch (IOException e){
                 e.printStackTrace();
@@ -71,6 +72,28 @@ public class FileAndURLCopy {
             return true;
         } catch (Exception e) {
             return false;
+        }
+    }
+    private static void copy(URL url, File dest) throws IOException {
+
+        HttpURLConnection huc =  ( HttpURLConnection )  url.openConnection();
+        huc.setRequestMethod ("GET");
+        huc.connect() ;
+        int code = huc.getResponseCode();
+        if (code < 200 || code > 299) {
+            System.out.println("Adres " + url.toString() + " zwraca status " + code + ".");
+            System.exit(1);
+        }
+
+        FileOutputStream os = null;
+
+        try {
+            ReadableByteChannel is = Channels.newChannel(url.openStream());
+            os = new FileOutputStream(dest);
+
+            os.getChannel().transferFrom(is, 0, Long.MAX_VALUE);
+        } finally {
+            os.close();
         }
     }
 }
