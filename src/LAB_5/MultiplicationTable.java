@@ -33,7 +33,6 @@ public class MultiplicationTable {
         float currentTry = 1;
         float grade =0;
         float points =0;
-
         while (currentTry <=Float.parseFloat(p.getProperty("powtorzen_maximum"))) {
             System.out.println("-----------------------");
             System.out.println("points: "+(int)points);
