@@ -14,9 +14,9 @@ public class FileCopy {
             System.exit(0);
         }
 
-        String sourceFileLocation = "C:\\Users\\Mateusz\\IdeaProjects\\java college\\data\\" + args[0];
+        String sourceFileLocation = args[0];
         Path pathIn = Paths.get(sourceFileLocation);
-        String destanationFileLocation = "C:\\Users\\Mateusz\\IdeaProjects\\java college\\data\\" + args[1];
+        String destanationFileLocation = args[1];
         Path pathOut = Paths.get(destanationFileLocation);
 
         File src = new File(sourceFileLocation), dst = new File(destanationFileLocation);

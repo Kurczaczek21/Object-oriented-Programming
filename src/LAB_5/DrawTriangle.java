@@ -14,7 +14,7 @@ public class DrawTriangle {
             System.out.println("Błędne wprowadzenie danych");
             System.exit(1);
         }
-        if(size<= 0){
+        if(size< 2){
             System.out.println("zły rozmiar");
             System.exit(1);
         }
