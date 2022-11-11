@@ -57,17 +57,20 @@ public class MultiplicationTable {
             grade = points/currentTry;
             System.out.println("current grade: "+String.format("%.0f",grade*100)+"%");
 
-//            System.out.println(currentTry>=Float.parseFloat(p.getProperty("powtorzen_minimum")));
-//            System.out.println(grade>=Float.parseFloat(p.getProperty("procent")));
-//            System.out.println(grade);
-//            System.out.println(Float.parseFloat(p.getProperty("procent"))/100);
             if (currentTry>=Float.parseFloat(p.getProperty("powtorzen_minimum")) && grade>=(Float.parseFloat(p.getProperty("procent"))/100)){
-                System.out.println("TEST PASSED");
                 break;
             }
             currentTry +=1;
         }
+        if(grade>=(Float.parseFloat(p.getProperty("procent"))/100)){
+            System.out.println("TEST PASSED");
+        }else {
+            System.out.println("TEST FAILED");
+        }
         System.out.println("Percentage of correct answers: "+ String.format("%.0f",grade*100)+"%");
+        System.out.println("Total points: "+ (int)points);
+        System.out.println("Total attempts: "+ (int)currentTry);
+
     }
 
     private static int randInt(int min, int max) {
