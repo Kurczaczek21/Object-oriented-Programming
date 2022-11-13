@@ -28,7 +28,7 @@ public class WordCounter {
             doAll = true;
         }
 
-        String fileLocation = "C:\\Users\\Mateusz\\IdeaProjects\\java college\\data\\" + fileName;
+        String fileLocation = fileName;
         BufferedReader reader = null;
 
         try {
