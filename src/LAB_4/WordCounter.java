@@ -18,7 +18,7 @@ public class WordCounter {
         boolean doAll = false;
 
         for(int i =0;i< args.length;i++){
-            if (!args[i].contains("-")) {
+            if (!args[i].startsWith("-")) {
                 fileName = args[i];
                 continue;
             }
@@ -28,7 +28,7 @@ public class WordCounter {
             doAll = true;
         }
 
-        String fileLocation = "C:\\Users\\Mateusz\\IdeaProjects\\java college\\data\\" + fileName;
+        String fileLocation = fileName;
         BufferedReader reader = null;
 
         try {

@@ -1,25 +1,20 @@
 package LAB_4;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.*;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.*;
 
 public class FileAndURLCopy {
     public static void main(String[] args) throws IOException {
-        if (args.length > 2) {
+        if (args.length < 2) {
             System.out.println("Brak argumentów programu.\n" + "Użycie: java FileCopy <source file> <destanation>");
             System.exit(0);
         }
 
-        String sourceFileLocation = "C:\\Users\\Mateusz\\IdeaProjects\\java college\\data\\" + args[0];
-        Path pathIn = Paths.get(sourceFileLocation);
-        String destanationFileLocation = "C:\\Users\\Mateusz\\IdeaProjects\\java college\\data\\" + args[1];
+        String sourceFileLocation = args[0];
+        String destanationFileLocation = args[1];
         Path pathOut = Paths.get(destanationFileLocation);
 
         File src = new File(sourceFileLocation), dst = new File(destanationFileLocation);
@@ -53,16 +48,27 @@ public class FileAndURLCopy {
         }
 
 
-        try {
+        try { //jest linkiem do strony
             if (isValidURL(args[0])) {
                 URL url = new URL(args[0]);
-                copy(url,dst);
-
-            } else {
+                URLConnection connection= url.openConnection();
+                InputStream stream= connection.getInputStream();
+                CopyUrl(url,dst);
+            } else { //jest plikiem
+                Path pathIn = Paths.get(sourceFileLocation);
                 Files.copy(pathIn, pathOut, StandardCopyOption.REPLACE_EXISTING);
             }
-        } catch (IOException e){
-                e.printStackTrace();
+        }catch(UnknownHostException e){
+            System.out.println("nieprawidlowy adres: "+args[0]);
+            System.exit(1);
+        }catch(AccessDeniedException e ){
+            System.out.println("odmowa dostepu");
+            System.exit(1);
+        }catch (NoRouteToHostException e){
+            System.out.println("nie mozna polaczyc sie z wybranym adresem");
+            System.exit(1);
+        }catch (IOException e){
+                System.out.println(e.getMessage());
             }
         }
     public static boolean isValidURL(String urlString) {
@@ -74,26 +80,15 @@ public class FileAndURLCopy {
             return false;
         }
     }
-    private static void copy(URL url, File dest) throws IOException {
-
-        HttpURLConnection huc =  ( HttpURLConnection )  url.openConnection();
-        huc.setRequestMethod ("GET");
-        huc.connect() ;
-        int code = huc.getResponseCode();
-        if (code < 200 || code > 299) {
-            System.out.println("Adres " + url.toString() + " zwraca status " + code + ".");
-            System.exit(1);
+    public static void CopyUrl(URL url,File koniec) throws IOException {
+        InputStream is = url.openStream();
+        OutputStream os = new FileOutputStream(koniec);
+        byte[] buffer = new byte[4096];
+        int len;
+        while ((len = is.read(buffer)) != -1) {
+            os.write(buffer, 0, len);
         }
-
-        FileOutputStream os = null;
-
-        try {
-            ReadableByteChannel is = Channels.newChannel(url.openStream());
-            os = new FileOutputStream(dest);
-
-            os.getChannel().transferFrom(is, 0, Long.MAX_VALUE);
-        } finally {
-            os.close();
-        }
+        os.close();
+        is.close();
     }
 }
