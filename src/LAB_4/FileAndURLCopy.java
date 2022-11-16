@@ -6,6 +6,11 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.file.*;
 
+/*
+javac .\WordCounter.java
+java -classpath C:\Users\mmkwa\IdeaProjects\java_studia\out\production\objectprog LAB_4.FileAndURLCopy abc.txt def.txt
+ */
+
 public class FileAndURLCopy {
     public static void main(String[] args) throws IOException {
         if (args.length < 2) {
