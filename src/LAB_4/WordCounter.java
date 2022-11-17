@@ -7,6 +7,21 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+
+//java -classpath C:\Users\Mateusz\IdeaProjects\objectprog\out\production\objectprog LAB_4.WordCounter
+/*
+    4
+    uruchamienie w terminalu
+    nazwa klasy nazwapliku
+    cwiczenie opcji
+
+    5
+    start bez param
+    z param
+    url nazwa pliku
+
+    wyjscie = wejscie i czy kopiuje plik
+ */
 public class WordCounter {
     public static void main(String[] args) throws IOException {
         if (args.length == 0 || args.length > 4) {
