@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+
+// java -classpath C:\Users\Mateusz\IdeaProjects\objectprog\src\ LAB_4.FileCopy abc.txt deffffff.txt
 public class FileCopy {
     public static void main(String[] args) throws IOException {
         if (args.length != 2) {
