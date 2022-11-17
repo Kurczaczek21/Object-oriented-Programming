@@ -12,14 +12,16 @@ public class G4c {
         jf.setLayout(new GridLayout(4,4));
 
         JPanel jp = new JPanel();
+        JPanel jp2 = new JPanel();
         jf.getContentPane().add(jp);
+        jf.getContentPane().add(jp2);
 
         JButton jb = new JButton("Hello!");
         jf.getContentPane().add(jb, BorderLayout.PAGE_END);
-//        jp.add(jb);
+        jp.add(jb);
 
         JButton jb2 = new JButton("How are you?");
-        jp.add(jb2);
+        jp2.add(jb2);
 
         jf.pack();
         jf.setVisible(true);
