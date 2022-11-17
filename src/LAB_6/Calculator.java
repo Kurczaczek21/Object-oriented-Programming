@@ -6,10 +6,17 @@ import java.awt.*;
 public class Calculator {
 
     public static void createAndShowGUI() {
-        JFrame jf = new JFrame("My First Frame");
 
-        jf.setResizable(false);
-        jf.setLocationRelativeTo(null);
+        JFrame frame = new JFrame(" Calculator kurczaka");
+
+        ImageIcon image = new ImageIcon("kalkulator.png");
+        frame.setIconImage(image.getImage());
+
+        frame.setVisible(true);
+        frame.setSize(750,740);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.getContentPane().setBackground(Color.DARK_GRAY);
 
         JTextField jt = new JTextField();
 
@@ -17,7 +24,8 @@ public class Calculator {
         jt.setFont(new Font("Arial",Font.BOLD,11));
 //        jt.setText(Integer);
         jt.setHorizontalAlignment(SwingConstants.RIGHT);
-        jf.getContentPane().add(jt,BorderLayout.NORTH);
+
+        frame.setLayout(new GridLayout(4,4));
 
         JPanel jp = new JPanel();
 
@@ -38,11 +46,10 @@ public class Calculator {
         jp.add(new JButton(" C "));
         jp.add(new JButton(" / "));
 
-        jf.getContentPane().add(jp, BorderLayout.CENTER);
+        frame.getContentPane().add(jp, BorderLayout.CENTER);
 
-        jf.pack();
-        jf.setVisible(true);
-        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+
     }
 
 
