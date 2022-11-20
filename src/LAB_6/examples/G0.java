@@ -1,4 +1,4 @@
-package LAB_6;
+package LAB_6.examples;
 
 import javax.swing.*;
 
