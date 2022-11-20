@@ -1,17 +1,19 @@
 package LAB_6;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.sql.SQLOutput;
 
 public class Calculator {
 
     public static void createAndShowGUI() {
+        String display ="";
+
+        TextField screen = new TextField();
+        screen.setSize(300,40);
 
         // BUTTON SETTINGS
         JButton button1 = new JButton(" 1 ");
-        button1.addActionListener(e -> System.out.println("1"));
+        button1.addActionListener(e -> display.concat("1"));
         button1.setFocusable(false);
 
         JButton button2 = new JButton(" 2 ");
@@ -98,9 +100,12 @@ public class Calculator {
         panel.add(button16);
 
         // DISPLAY PNAEL
-        JPanel panel2 = new JPanel();
-        panel2.setBackground(Color.WHITE);
-        panel2.setPreferredSize(new Dimension(300,40));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        JTextField field = new JTextField(12);
+        field.setFont(new Font("Calabri",Font.BOLD,24));
+        field.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+
 
         // MAIN FRAME
         JFrame frame = new JFrame(" Calculator kurczaka");
@@ -114,7 +119,8 @@ public class Calculator {
         frame.setResizable(false);
         frame.getContentPane().setBackground(Color.DARK_GRAY);
         frame.setLayout(new FlowLayout());
-        frame.add(panel2);
+        frame.setLocationRelativeTo(null);
+        frame.add(field, gbc);
         frame.add(panel);
 
 //        frame.pack();
