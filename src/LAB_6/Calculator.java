@@ -105,6 +105,8 @@ public class Calculator {
         JTextField field = new JTextField(12);
         field.setFont(new Font("Calabri",Font.BOLD,24));
         field.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+//        display = field.getText();
+//        System.out.println(display);
 
 
         // MAIN FRAME
