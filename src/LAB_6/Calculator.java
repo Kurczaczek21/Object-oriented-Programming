@@ -14,8 +14,9 @@ public class Calculator {
     static boolean multipleEquation = false;
     static boolean lastInputWasAction = false;
     static boolean dividingByZero = false;
+    static boolean hasBeenSolved = true;
 
-    static String action = "start";
+    static String action = "none";
     static String answer;
     public static void createAndShowGUI() {
 
@@ -209,8 +210,6 @@ public class Calculator {
                 case "none":
                     total = Double.parseDouble(field.getText());
                     break;
-                case "start":
-                    total = Double.parseDouble(field.getText());
             }
             if ((total % 1) == 0) {
                 answer = String.valueOf((int) total);
@@ -225,7 +224,7 @@ public class Calculator {
             }
             multipleEquation = true;
             lastInputWasAction = true;
-//            action = "none";
+            hasBeenSolved = true;
         });
         button14.setFocusable(false);
 
@@ -233,8 +232,9 @@ public class Calculator {
         button15.addActionListener(evt -> {
             int_1 = Double.NaN;
             int_2 = Double.NaN;
-            action = "start";
             field.setText("0");
+            action = "none";
+            hasBeenSolved = true;
         });
         button15.setFocusable(false);
 
@@ -242,11 +242,13 @@ public class Calculator {
 
         JButton button4 = new JButton(" + ");
         button4.addActionListener(e -> {
-            if (!action.equals("none")) {
+            if (!hasBeenSolved) {
                 button14.doClick();
+                hasBeenSolved = true;
             }
             int_1 = Double.parseDouble(field.getText());
             action = "+";
+            hasBeenSolved = false;
             multipleEquation = false;
             lastInputWasAction = true;
         });
@@ -255,14 +257,16 @@ public class Calculator {
 
         JButton button8 = new JButton(" - ");
         button8.addActionListener(e -> {
-            if (!action.equals("none")) {
+            if (!hasBeenSolved) {
                 button14.doClick();
+                hasBeenSolved = true;
             }
             if (field.getText().length() == 0) {
                 field.setText(field.getText().concat("-"));
             } else {
                 int_1 = Double.parseDouble(field.getText());
                 action = "-";
+                hasBeenSolved = false;
             }
             multipleEquation = false;
             if(field.getText().contains("-")) {
@@ -275,11 +279,13 @@ public class Calculator {
 
         JButton button12 = new JButton(" * ");
         button12.addActionListener(e -> {
-            if (!action.equals("none")) {
+            if (!hasBeenSolved) {
                 button14.doClick();
+                hasBeenSolved = true;
             }
             int_1 = Double.parseDouble(field.getText());
             action="*";
+            hasBeenSolved = false;
             multipleEquation = false;
             lastInputWasAction = true;
 
@@ -288,11 +294,13 @@ public class Calculator {
 
         JButton button16 = new JButton(" / ");
         button16.addActionListener(e -> {
-            if (action.equals("-")) {
+            if (!hasBeenSolved) {
                 button14.doClick();
+                hasBeenSolved = true;
             }
             int_1 = Double.parseDouble(field.getText());
             action="/";
+            hasBeenSolved = false;
             multipleEquation = false;
             lastInputWasAction = true;
         });
