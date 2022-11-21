@@ -2,9 +2,17 @@ package LAB_6;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Calculator {
 
+    static double int_1 = Double.NaN;
+    static double int_2 = Double.NaN;
+    static double total = Double.NaN;
+
+    static String action;
+    static String answer;
     public static void createAndShowGUI() {
 
 
@@ -13,7 +21,7 @@ public class Calculator {
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         JTextField field = new JTextField(12);
         field.setFont(new Font("Calabri",Font.BOLD,24));
-//        field.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        field.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         field.setEditable( false );
 
 
@@ -31,6 +39,7 @@ public class Calculator {
 //            panel.add(createButton(index));
 //            if(i==3)
 //        }
+        char sign ;
 
 
 
@@ -53,11 +62,12 @@ public class Calculator {
         button3.setFocusable(false);
 
         JButton button4 = new JButton(" + ");
-        button4.addActionListener(evt -> {
-            if(field.getText().length()==0 || field.getText().endsWith("*") || field.getText().endsWith("/") || field.getText().endsWith("-") || field.getText().endsWith("+")) {
-
-            }else {
-                field.setText(field.getText().concat("+"));
+        button4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    int_1 = Double.parseDouble(field.getText());
+                    field.setText("");
+                    action = "+";
             }
         });
         button4.setFocusable(false);
@@ -81,10 +91,16 @@ public class Calculator {
         button7.setFocusable(false);
 
         JButton button8 = new JButton(" - ");
-        button8.addActionListener(evt -> {
-            if(field.getText().endsWith("-")) {
-            }else {
-                field.setText(field.getText().concat("-"));
+        button8.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (field.getText().length() == 0) {
+                    field.setText(field.getText().concat("-"));
+                } else {
+                    int_1 = Double.parseDouble(field.getText());
+                    field.setText("");
+                    action = "-";
+                }
             }
         });
         button8.setFocusable(false);
@@ -108,10 +124,12 @@ public class Calculator {
         button11.setFocusable(false);
 
         JButton button12 = new JButton(" * ");
-        button12.addActionListener(evt -> {
-            if(field.getText().length()==0 || field.getText().endsWith("*") || field.getText().endsWith("/") || field.getText().endsWith("-") || field.getText().endsWith("+")) {
-            }else {
-                field.setText(field.getText().concat("*"));
+        button12.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int_1 = Double.parseDouble(field.getText());
+                field.setText("");
+                action="*";
             }
         });
         button12.setFocusable(false);
@@ -126,21 +144,45 @@ public class Calculator {
 
         JButton button14 = new JButton(" = ");
         button14.addActionListener(evt -> {
-            field.setText("WYNIK");
+            int_2 = Double.parseDouble(field.getText());
+            switch (action){
+                case "+":
+                    total = int_1 + int_2;
+                    break;
+                case "-":
+                    total = int_1 - int_2;
+                    break;
+                case "*":
+                    total = int_1 * int_2;
+                    break;
+                case "/":
+                    total = int_1 / int_2;
+                    break;
+            }
+            if ((total % 1) == 0){
+                answer = String.valueOf((int) total);
+            }else {
+                answer = String.valueOf(total);
+            }
+            field.setText(answer);
         });
         button14.setFocusable(false);
 
         JButton button15 = new JButton(" C ");
         button15.addActionListener(evt -> {
+            int_1 = Double.NaN;
+            int_2 = Double.NaN;
             field.setText("");
         });
         button15.setFocusable(false);
 
         JButton button16 = new JButton(" / ");
-        button16.addActionListener(evt -> {
-            if(field.getText().length()==0 || field.getText().endsWith("*") || field.getText().endsWith("/") || field.getText().endsWith("-") || field.getText().endsWith("+")) {
-            }else {
-                field.setText(field.getText().concat("/"));
+        button16.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int_1 = Double.parseDouble(field.getText());
+                field.setText("");
+                action="/";
             }
         });
         button16.setFocusable(false);
@@ -197,5 +239,4 @@ public class Calculator {
 //        btn.addActionListener(buttonActionHandler);
         return btn;
     }
-
 }
