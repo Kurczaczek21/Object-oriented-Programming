@@ -2,6 +2,9 @@ package LAB_6;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class Calculator {
 
     static double int_1 = Double.NaN;
@@ -9,8 +12,10 @@ public class Calculator {
     static double total = Double.NaN;
 
     static boolean multipleEquation = false;
+    static boolean lastInputWasAction = false;
+    static boolean dividingByZero = false;
 
-    static String action;
+    static String action = "start";
     static String answer;
     public static void createAndShowGUI() {
 
@@ -31,6 +36,7 @@ public class Calculator {
         field.setFont(new Font("Calabri",Font.BOLD,24));
         field.setHorizontalAlignment(JTextField.RIGHT);
         field.setEditable( false );
+        field.setText("0");
 
 
         // BUTTON PANEL
@@ -46,118 +52,180 @@ public class Calculator {
 
         JButton button1 = new JButton(" 1 ");
         button1.addActionListener(evt -> {
+            if(lastInputWasAction){
+                field.setText("");
+            }
+            if(field.getText().equals("0")){
+                field.setText("");
+            }
             field.setText(field.getText().concat("1"));
+            lastInputWasAction = false;
         });
         button1.setFocusable(false);
 
         JButton button2 = new JButton(" 2 ");
         button2.addActionListener(evt -> {
+            if(lastInputWasAction){
+                field.setText("");
+            }
+            if(field.getText().equals("0")){
+                field.setText("");
+            }
             field.setText(field.getText().concat("2"));
+            lastInputWasAction = false;
         });
         button2.setFocusable(false);
 
         JButton button3 = new JButton(" 3 ");
         button3.addActionListener(evt -> {
+            if(lastInputWasAction){
+                field.setText("");
+            }
+            if(field.getText().equals("0")){
+                field.setText("");
+            }
             field.setText(field.getText().concat("3"));
+            lastInputWasAction = false;
         });
         button3.setFocusable(false);
 
-        JButton button4 = new JButton(" + ");
-        button4.addActionListener(e -> {
-                int_1 = Double.parseDouble(field.getText());
-                field.setText("");
-                action = "+";
-                multipleEquation = false;
-        });
-        button4.setFocusable(false);
-
         JButton button5 = new JButton(" 4 ");
         button5.addActionListener(evt -> {
+            if(lastInputWasAction){
+                field.setText("");
+            }
+            if(field.getText().equals("0")){
+                field.setText("");
+            }
             field.setText(field.getText().concat("4"));
+            lastInputWasAction = false;
         });
         button5.setFocusable(false);
 
         JButton button6 = new JButton(" 5 ");
         button6.addActionListener(evt -> {
+            if(lastInputWasAction){
+                field.setText("");
+            }
+            if(field.getText().equals("0")){
+                field.setText("");
+            }
             field.setText(field.getText().concat("5"));
+            lastInputWasAction = false;
         });
         button6.setFocusable(false);
 
         JButton button7 = new JButton(" 6 ");
         button7.addActionListener(evt -> {
+            if(lastInputWasAction){
+                field.setText("");
+            }
+            if(field.getText().equals("0")){
+                field.setText("");
+            }
             field.setText(field.getText().concat("6"));
+            lastInputWasAction = false;
         });
         button7.setFocusable(false);
 
-        JButton button8 = new JButton(" - ");
-        button8.addActionListener(e -> {
-                if (field.getText().length() == 0) {
-                    field.setText(field.getText().concat("-"));
-                } else {
-                    int_1 = Double.parseDouble(field.getText());
-                    field.setText("");
-                    action = "-";
-                }
-                multipleEquation = false;
-        });
-        button8.setFocusable(false);
 
         JButton button9 = new JButton(" 7 ");
         button9.addActionListener(evt -> {
+            if(lastInputWasAction){
+                field.setText("");
+            }
+            if(field.getText().equals("0")){
+                field.setText("");
+            }
             field.setText(field.getText().concat("7"));
+            lastInputWasAction = false;
         });
         button9.setFocusable(false);
 
         JButton button10 = new JButton(" 8 ");
         button10.addActionListener(evt -> {
+            if(lastInputWasAction){
+                field.setText("");
+            }
+            if(field.getText().equals("0")){
+                field.setText("");
+            }
             field.setText(field.getText().concat("8"));
+            lastInputWasAction = false;
         });
         button10.setFocusable(false);
 
         JButton button11 = new JButton(" 9 ");
         button11.addActionListener(evt -> {
+            if(lastInputWasAction){
+                field.setText("");
+            }
+            if(field.getText().equals("0")){
+                field.setText("");
+            }
             field.setText(field.getText().concat("9"));
+            lastInputWasAction = false;
         });
         button11.setFocusable(false);
 
-        JButton button12 = new JButton(" * ");
-        button12.addActionListener(e -> {
-                int_1 = Double.parseDouble(field.getText());
-                field.setText("");
-                action="*";
-                multipleEquation = false;
-        });
-        button12.setFocusable(false);
-
         JButton button13 = new JButton(" 0 ");
         button13.addActionListener(evt -> {
-            if(field.getText().length()!=0) {
+            if(lastInputWasAction){
+                field.setText("");
+            }
+            if(!field.getText().startsWith("0")) {
                 field.setText(field.getText().concat("0"));
             }
+            lastInputWasAction = false;
         });
         button13.setFocusable(false);
 
+        // EQUATION BUTTON
+
         JButton button14 = new JButton(" = ");
-        button14.addActionListener(evt -> {
-            if(multipleEquation) {
+        button14.addActionListener(e -> {
+            if (multipleEquation) {
                 int_1 = Double.parseDouble(field.getText());
-            }else {
+            } else {
                 int_2 = Double.parseDouble(field.getText());
             }
 
             switch (action) {
-                case "+" -> total = int_1 + int_2;
-                case "-" -> total = int_1 - int_2;
-                case "*" -> total = int_1 * int_2;
-                case "/" -> total = int_1 / int_2;
+                case "+":
+                    total = int_1 + int_2;
+                    break;
+                case "-":
+                    total = int_1 - int_2;
+                    break;
+                case "*":
+                    total = int_1 * int_2;
+                    break;
+                case "/":
+                    if (int_2 != 0) {
+                        total = int_1 / int_2;
+                    } else {
+                        dividingByZero = true;
+                    }
+                case "none":
+                    total = Double.parseDouble(field.getText());
+                    break;
+                case "start":
+                    total = Double.parseDouble(field.getText());
             }
-            if ((total % 1) == 0){
+            if ((total % 1) == 0) {
                 answer = String.valueOf((int) total);
-            }else {
+            } else {
                 answer = String.valueOf(total);
             }
-            field.setText(answer);
+            if (!dividingByZero) {
+                field.setText(answer);
+            } else {
+                field.setText("ERROR");
+                dividingByZero = false;
+            }
             multipleEquation = true;
+            lastInputWasAction = true;
+//            action = "none";
         });
         button14.setFocusable(false);
 
@@ -165,17 +233,73 @@ public class Calculator {
         button15.addActionListener(evt -> {
             int_1 = Double.NaN;
             int_2 = Double.NaN;
-            field.setText("");
+            action = "start";
+            field.setText("0");
         });
         button15.setFocusable(false);
 
+        // MATH OPERATION BUTTONS
+
+        JButton button4 = new JButton(" + ");
+        button4.addActionListener(e -> {
+            if (!action.equals("none")) {
+                button14.doClick();
+            }
+            int_1 = Double.parseDouble(field.getText());
+            action = "+";
+            multipleEquation = false;
+            lastInputWasAction = true;
+        });
+        button4.setFocusable(false);
+
+
+        JButton button8 = new JButton(" - ");
+        button8.addActionListener(e -> {
+            if (!action.equals("none")) {
+                button14.doClick();
+            }
+            if (field.getText().length() == 0) {
+                field.setText(field.getText().concat("-"));
+            } else {
+                int_1 = Double.parseDouble(field.getText());
+                action = "-";
+            }
+            multipleEquation = false;
+            if(field.getText().contains("-")) {
+//                    lastInputWasAction = false;
+            }else {
+                lastInputWasAction = true;
+            }
+        });
+        button8.setFocusable(false);
+
+        JButton button12 = new JButton(" * ");
+        button12.addActionListener(e -> {
+            if (!action.equals("none")) {
+                button14.doClick();
+            }
+            int_1 = Double.parseDouble(field.getText());
+            action="*";
+            multipleEquation = false;
+            lastInputWasAction = true;
+
+        });
+        button12.setFocusable(false);
+
         JButton button16 = new JButton(" / ");
         button16.addActionListener(e -> {
-                int_1 = Double.parseDouble(field.getText());
-                field.setText("");
-                action="/";
+            if (action.equals("-")) {
+                button14.doClick();
+            }
+            int_1 = Double.parseDouble(field.getText());
+            action="/";
+            multipleEquation = false;
+            lastInputWasAction = true;
         });
         button16.setFocusable(false);
+
+
+
 
 //        for (int index = 1; index <= 16; index++) {
 //            panel.add(button(index));
