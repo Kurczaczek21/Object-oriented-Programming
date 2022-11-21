@@ -2,9 +2,6 @@ package LAB_6;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 public class Calculator {
 
     static double int_1 = Double.NaN;
@@ -35,13 +32,6 @@ public class Calculator {
 
         // BUTTON SETTINGS
 
-//        for (int index = 1; index < 10; index++) {
-//            panel.add(createButton(index));
-//            if(i==3)
-//        }
-        char sign ;
-
-
 
         JButton button1 = new JButton(" 1 ");
         button1.addActionListener(evt -> {
@@ -62,13 +52,10 @@ public class Calculator {
         button3.setFocusable(false);
 
         JButton button4 = new JButton(" + ");
-        button4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        button4.addActionListener(e -> {
                     int_1 = Double.parseDouble(field.getText());
                     field.setText("");
                     action = "+";
-            }
         });
         button4.setFocusable(false);
 
@@ -91,9 +78,7 @@ public class Calculator {
         button7.setFocusable(false);
 
         JButton button8 = new JButton(" - ");
-        button8.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        button8.addActionListener(e -> {
                 if (field.getText().length() == 0) {
                     field.setText(field.getText().concat("-"));
                 } else {
@@ -101,7 +86,6 @@ public class Calculator {
                     field.setText("");
                     action = "-";
                 }
-            }
         });
         button8.setFocusable(false);
 
@@ -124,13 +108,10 @@ public class Calculator {
         button11.setFocusable(false);
 
         JButton button12 = new JButton(" * ");
-        button12.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        button12.addActionListener(e -> {
                 int_1 = Double.parseDouble(field.getText());
                 field.setText("");
                 action="*";
-            }
         });
         button12.setFocusable(false);
 
@@ -145,19 +126,11 @@ public class Calculator {
         JButton button14 = new JButton(" = ");
         button14.addActionListener(evt -> {
             int_2 = Double.parseDouble(field.getText());
-            switch (action){
-                case "+":
-                    total = int_1 + int_2;
-                    break;
-                case "-":
-                    total = int_1 - int_2;
-                    break;
-                case "*":
-                    total = int_1 * int_2;
-                    break;
-                case "/":
-                    total = int_1 / int_2;
-                    break;
+            switch (action) {
+                case "+" -> total = int_1 + int_2;
+                case "-" -> total = int_1 - int_2;
+                case "*" -> total = int_1 * int_2;
+                case "/" -> total = int_1 / int_2;
             }
             if ((total % 1) == 0){
                 answer = String.valueOf((int) total);
@@ -177,15 +150,16 @@ public class Calculator {
         button15.setFocusable(false);
 
         JButton button16 = new JButton(" / ");
-        button16.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        button16.addActionListener(e -> {
                 int_1 = Double.parseDouble(field.getText());
                 field.setText("");
                 action="/";
-            }
         });
         button16.setFocusable(false);
+
+//        for (int index = 1; index <= 16; index++) {
+//            panel.add(button(index));
+//        }
 
         panel.add(button1);
         panel.add(button2);
@@ -220,10 +194,6 @@ public class Calculator {
         frame.setLocationRelativeTo(null);
         frame.add(field, gbc);
         frame.add(panel);
-
-//        frame.pack();
-
-
     }
 
 
