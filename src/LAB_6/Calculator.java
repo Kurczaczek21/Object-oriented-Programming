@@ -8,9 +8,20 @@ public class Calculator {
     static double int_2 = Double.NaN;
     static double total = Double.NaN;
 
+    static boolean multipleEquation = false;
+
     static String action;
     static String answer;
     public static void createAndShowGUI() {
+
+        /*
+            to do:
+            - nadpisywanie znaku
+            - 0 na start
+            - nie clearowanie po nacisnieciu znaku
+            - dzialanie przy wprowadzeniu 1 liczby i znaku np 2 * = daje nam 4 bo 2 zostala i jest nowym arg 2
+            - optymalizacja bo za duzo linijek :(
+         */
 
 
         // DISPLAY PNAEL
@@ -18,7 +29,7 @@ public class Calculator {
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         JTextField field = new JTextField(12);
         field.setFont(new Font("Calabri",Font.BOLD,24));
-        field.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        field.setHorizontalAlignment(JTextField.RIGHT);
         field.setEditable( false );
 
 
@@ -53,9 +64,10 @@ public class Calculator {
 
         JButton button4 = new JButton(" + ");
         button4.addActionListener(e -> {
-                    int_1 = Double.parseDouble(field.getText());
-                    field.setText("");
-                    action = "+";
+                int_1 = Double.parseDouble(field.getText());
+                field.setText("");
+                action = "+";
+                multipleEquation = false;
         });
         button4.setFocusable(false);
 
@@ -86,6 +98,7 @@ public class Calculator {
                     field.setText("");
                     action = "-";
                 }
+                multipleEquation = false;
         });
         button8.setFocusable(false);
 
@@ -112,6 +125,7 @@ public class Calculator {
                 int_1 = Double.parseDouble(field.getText());
                 field.setText("");
                 action="*";
+                multipleEquation = false;
         });
         button12.setFocusable(false);
 
@@ -125,7 +139,12 @@ public class Calculator {
 
         JButton button14 = new JButton(" = ");
         button14.addActionListener(evt -> {
-            int_2 = Double.parseDouble(field.getText());
+            if(multipleEquation) {
+                int_1 = Double.parseDouble(field.getText());
+            }else {
+                int_2 = Double.parseDouble(field.getText());
+            }
+
             switch (action) {
                 case "+" -> total = int_1 + int_2;
                 case "-" -> total = int_1 - int_2;
@@ -138,6 +157,7 @@ public class Calculator {
                 answer = String.valueOf(total);
             }
             field.setText(answer);
+            multipleEquation = true;
         });
         button14.setFocusable(false);
 
