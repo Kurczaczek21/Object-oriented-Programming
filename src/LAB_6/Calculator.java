@@ -2,8 +2,6 @@ package LAB_6;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Calculator {
 
@@ -11,8 +9,8 @@ public class Calculator {
     static double int_2 = Double.NaN;
     static double total = Double.NaN;
 
-    static boolean multipleEquation = false;
-    static boolean lastInputWasAction = false;
+    static boolean lastInputWasEqual = false;
+    static boolean lastInputWasAction = true;
     static boolean dividingByZero = false;
     static boolean hasBeenSolved = true;
 
@@ -185,7 +183,7 @@ public class Calculator {
 
         JButton button14 = new JButton(" = ");
         button14.addActionListener(e -> {
-            if (multipleEquation) {
+            if (lastInputWasEqual) {
                 int_1 = Double.parseDouble(field.getText());
             } else {
                 int_2 = Double.parseDouble(field.getText());
@@ -222,7 +220,7 @@ public class Calculator {
                 field.setText("ERROR");
                 dividingByZero = false;
             }
-            multipleEquation = true;
+            lastInputWasEqual = true;
             lastInputWasAction = true;
             hasBeenSolved = true;
         });
@@ -248,8 +246,10 @@ public class Calculator {
             }
             int_1 = Double.parseDouble(field.getText());
             action = "+";
-            hasBeenSolved = false;
-            multipleEquation = false;
+            if(!lastInputWasAction) {
+                hasBeenSolved = false;
+            }
+            lastInputWasEqual = false;
             lastInputWasAction = true;
         });
         button4.setFocusable(false);
@@ -261,19 +261,15 @@ public class Calculator {
                 button14.doClick();
                 hasBeenSolved = true;
             }
-            if (field.getText().length() == 0) {
-                field.setText(field.getText().concat("-"));
-            } else {
-                int_1 = Double.parseDouble(field.getText());
-                action = "-";
+
+            int_1 = Double.parseDouble(field.getText());
+            action = "-";
+
+            if(!lastInputWasAction) {
                 hasBeenSolved = false;
             }
-            multipleEquation = false;
-            if(field.getText().contains("-")) {
-//                    lastInputWasAction = false;
-            }else {
-                lastInputWasAction = true;
-            }
+            lastInputWasEqual = false;
+            lastInputWasAction = true;
         });
         button8.setFocusable(false);
 
@@ -285,8 +281,10 @@ public class Calculator {
             }
             int_1 = Double.parseDouble(field.getText());
             action="*";
-            hasBeenSolved = false;
-            multipleEquation = false;
+            if(!lastInputWasAction) {
+                hasBeenSolved = false;
+            }
+            lastInputWasEqual = false;
             lastInputWasAction = true;
 
         });
@@ -300,8 +298,10 @@ public class Calculator {
             }
             int_1 = Double.parseDouble(field.getText());
             action="/";
-            hasBeenSolved = false;
-            multipleEquation = false;
+            if(!lastInputWasAction) {
+                hasBeenSolved = false;
+            }
+            lastInputWasEqual = false;
             lastInputWasAction = true;
         });
         button16.setFocusable(false);
