@@ -54,11 +54,19 @@ public class Calculator {
             if(lastInputWasAction){
                 field.setText("");
             }
+            if(lastInputWasEqual){
+                field.setText("");
+                int_1 = Double.NaN;
+                int_2 = Double.NaN;
+                action = "none";
+                hasBeenSolved = true;
+            }
             if(field.getText().equals("0")){
                 field.setText("");
             }
             field.setText(field.getText().concat("1"));
             lastInputWasAction = false;
+            lastInputWasEqual = false;
         });
         button1.setFocusable(false);
 
@@ -67,11 +75,19 @@ public class Calculator {
             if(lastInputWasAction){
                 field.setText("");
             }
+            if(lastInputWasEqual){
+                field.setText("");
+                int_1 = Double.NaN;
+                int_2 = Double.NaN;
+                action = "none";
+                hasBeenSolved = true;
+            }
             if(field.getText().equals("0")){
                 field.setText("");
             }
             field.setText(field.getText().concat("2"));
             lastInputWasAction = false;
+            lastInputWasEqual = false;
         });
         button2.setFocusable(false);
 
@@ -80,11 +96,19 @@ public class Calculator {
             if(lastInputWasAction){
                 field.setText("");
             }
+            if(lastInputWasEqual){
+                field.setText("");
+                int_1 = Double.NaN;
+                int_2 = Double.NaN;
+                action = "none";
+                hasBeenSolved = true;
+            }
             if(field.getText().equals("0")){
                 field.setText("");
             }
             field.setText(field.getText().concat("3"));
             lastInputWasAction = false;
+            lastInputWasEqual = false;
         });
         button3.setFocusable(false);
 
@@ -93,11 +117,19 @@ public class Calculator {
             if(lastInputWasAction){
                 field.setText("");
             }
+            if(lastInputWasEqual){
+                field.setText("");
+                int_1 = Double.NaN;
+                int_2 = Double.NaN;
+                action = "none";
+                hasBeenSolved = true;
+            }
             if(field.getText().equals("0")){
                 field.setText("");
             }
             field.setText(field.getText().concat("4"));
             lastInputWasAction = false;
+            lastInputWasEqual = false;
         });
         button5.setFocusable(false);
 
@@ -106,11 +138,19 @@ public class Calculator {
             if(lastInputWasAction){
                 field.setText("");
             }
+            if(lastInputWasEqual){
+                field.setText("");
+                int_1 = Double.NaN;
+                int_2 = Double.NaN;
+                action = "none";
+                hasBeenSolved = true;
+            }
             if(field.getText().equals("0")){
                 field.setText("");
             }
             field.setText(field.getText().concat("5"));
             lastInputWasAction = false;
+            lastInputWasEqual = false;
         });
         button6.setFocusable(false);
 
@@ -119,11 +159,19 @@ public class Calculator {
             if(lastInputWasAction){
                 field.setText("");
             }
+            if(lastInputWasEqual){
+                field.setText("");
+                int_1 = Double.NaN;
+                int_2 = Double.NaN;
+                action = "none";
+                hasBeenSolved = true;
+            }
             if(field.getText().equals("0")){
                 field.setText("");
             }
             field.setText(field.getText().concat("6"));
             lastInputWasAction = false;
+            lastInputWasEqual = false;
         });
         button7.setFocusable(false);
 
@@ -133,30 +181,47 @@ public class Calculator {
             if(lastInputWasAction){
                 field.setText("");
             }
+            if(lastInputWasEqual){
+                field.setText("");
+                int_1 = Double.NaN;
+                int_2 = Double.NaN;
+                action = "none";
+                hasBeenSolved = true;
+            }
             if(field.getText().equals("0")){
                 field.setText("");
             }
             field.setText(field.getText().concat("7"));
             lastInputWasAction = false;
+            lastInputWasEqual = false;
         });
         button9.setFocusable(false);
 
         JButton button10 = new JButton(" 8 ");
         button10.addActionListener(evt -> {
-            if(lastInputWasAction){
+            if(lastInputWasAction) {
                 field.setText("");
             }
+            if(lastInputWasEqual){
+                field.setText("");
+                int_1 = Double.NaN;
+                int_2 = Double.NaN;
+                action = "none";
+                hasBeenSolved = true;
+            }
+
             if(field.getText().equals("0")){
                 field.setText("");
             }
             field.setText(field.getText().concat("8"));
             lastInputWasAction = false;
+            lastInputWasEqual = false;
         });
         button10.setFocusable(false);
 
         JButton button11 = new JButton(" 9 ");
-        button11.addActionListener(evt -> {
-            if(lastInputWasAction){
+        button11.addActionListener(e -> {
+            if(lastInputWasAction || lastInputWasEqual){
                 field.setText("");
             }
             if(field.getText().equals("0")){
@@ -164,18 +229,27 @@ public class Calculator {
             }
             field.setText(field.getText().concat("9"));
             lastInputWasAction = false;
+            lastInputWasEqual = false;
         });
         button11.setFocusable(false);
 
         JButton button13 = new JButton(" 0 ");
-        button13.addActionListener(evt -> {
+        button13.addActionListener(e -> {
             if(lastInputWasAction){
                 field.setText("");
+            }
+            if(lastInputWasEqual){
+                field.setText("");
+                int_1 = Double.NaN;
+                int_2 = Double.NaN;
+                action = "none";
+                hasBeenSolved = true;
             }
             if(!field.getText().startsWith("0")) {
                 field.setText(field.getText().concat("0"));
             }
             lastInputWasAction = false;
+            lastInputWasEqual = false;
         });
         button13.setFocusable(false);
 
@@ -200,11 +274,13 @@ public class Calculator {
                     total = int_1 * int_2;
                     break;
                 case "/":
+                    System.out.println("ALOOO");
                     if (int_2 != 0) {
                         total = int_1 / int_2;
                     } else {
                         dividingByZero = true;
                     }
+                    break;
                 case "none":
                     total = Double.parseDouble(field.getText());
                     break;
@@ -227,7 +303,7 @@ public class Calculator {
         button14.setFocusable(false);
 
         JButton button15 = new JButton(" C ");
-        button15.addActionListener(evt -> {
+        button15.addActionListener(e -> {
             int_1 = Double.NaN;
             int_2 = Double.NaN;
             field.setText("0");
@@ -243,7 +319,7 @@ public class Calculator {
             if(action=="+" && lastInputWasAction){
                 return;
             }
-            if (!hasBeenSolved) {
+            if (!hasBeenSolved && !lastInputWasAction) {
                 button14.doClick();
                 hasBeenSolved = true;
             }
@@ -263,7 +339,7 @@ public class Calculator {
             if(action=="-" && lastInputWasAction){
                 return;
             }
-            if (!hasBeenSolved) {
+            if (!hasBeenSolved && !lastInputWasAction) {
                 button14.doClick();
                 hasBeenSolved = true;
             }
@@ -284,7 +360,7 @@ public class Calculator {
             if(action=="*" && lastInputWasAction){
                 return;
             }
-            if (!hasBeenSolved) {
+            if (!hasBeenSolved && !lastInputWasAction) {
                 button14.doClick();
                 hasBeenSolved = true;
             }
@@ -304,7 +380,7 @@ public class Calculator {
             if(action=="/" && lastInputWasAction){
                 return;
             }
-            if (!hasBeenSolved) {
+            if (!hasBeenSolved && !lastInputWasAction) {
                 button14.doClick();
                 hasBeenSolved = true;
             }
