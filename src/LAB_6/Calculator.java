@@ -221,7 +221,7 @@ public class Calculator {
                 dividingByZero = false;
             }
             lastInputWasEqual = true;
-            lastInputWasAction = true;
+            lastInputWasAction = false;
             hasBeenSolved = true;
         });
         button14.setFocusable(false);
@@ -240,6 +240,9 @@ public class Calculator {
 
         JButton button4 = new JButton(" + ");
         button4.addActionListener(e -> {
+            if(action=="+" && lastInputWasAction){
+                return;
+            }
             if (!hasBeenSolved) {
                 button14.doClick();
                 hasBeenSolved = true;
@@ -257,6 +260,9 @@ public class Calculator {
 
         JButton button8 = new JButton(" - ");
         button8.addActionListener(e -> {
+            if(action=="-" && lastInputWasAction){
+                return;
+            }
             if (!hasBeenSolved) {
                 button14.doClick();
                 hasBeenSolved = true;
@@ -275,6 +281,9 @@ public class Calculator {
 
         JButton button12 = new JButton(" * ");
         button12.addActionListener(e -> {
+            if(action=="*" && lastInputWasAction){
+                return;
+            }
             if (!hasBeenSolved) {
                 button14.doClick();
                 hasBeenSolved = true;
@@ -292,6 +301,9 @@ public class Calculator {
 
         JButton button16 = new JButton(" / ");
         button16.addActionListener(e -> {
+            if(action=="/" && lastInputWasAction){
+                return;
+            }
             if (!hasBeenSolved) {
                 button14.doClick();
                 hasBeenSolved = true;
