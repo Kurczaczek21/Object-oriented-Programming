@@ -1,9 +1,9 @@
 package LAB_6;
-                                                // Credits to Mateusz Warzecha
-import javax.swing.*;                           // github:
-import java.awt.*;                              // https://github.com/Kurczaczek21/
-import java.util.Objects;                       // feel free to copy <3
-                                                // i dont care, its just a code
+                                                // Simple Calculator app
+import javax.swing.*;                           // ver 1.0
+import java.awt.*;                              // Credits to Mateusz Warzecha
+import java.util.Objects;                       // github:
+                                                // https://github.com/Kurczaczek21/
 public class Calculator {
 
     static double int_1 = Double.NaN;           // value of first variable
