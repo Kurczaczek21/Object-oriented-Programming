@@ -2,6 +2,8 @@ package LAB_6;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Objects;
 
 public class Calculator {
 
@@ -17,16 +19,6 @@ public class Calculator {
     static String action = "none";
     static String answer;
     public static void createAndShowGUI() {
-
-        /*
-            to do:
-            - nadpisywanie znaku
-            - 0 na start
-            - nie clearowanie po nacisnieciu znaku
-            - dzialanie przy wprowadzeniu 1 liczby i znaku np 2 * = daje nam 4 bo 2 zostala i jest nowym arg 2
-            - optymalizacja bo za duzo linijek :(
-         */
-
 
         // DISPLAY PNAEL
         GridBagConstraints gbc = new GridBagConstraints();
@@ -48,193 +40,41 @@ public class Calculator {
 
         // BUTTON SETTINGS
 
+//        HashMap<Integer, JButton> numButtons = new HashMap<Integer, JButton>();
+//        for (int i=1;i<10;i++){
+//            numButtons.put(i,createButton(i, field));
+//        }
 
-        JButton button1 = new JButton(" 1 ");
-        button1.addActionListener(evt -> {
-            if(lastInputWasAction){
-                field.setText("");
-            }
-            if(lastInputWasEqual){
-                field.setText("");
-                int_1 = Double.NaN;
-                int_2 = Double.NaN;
-                action = "none";
-                hasBeenSolved = true;
-            }
-            if(field.getText().equals("0")){
-                field.setText("");
-            }
-            field.setText(field.getText().concat("1"));
-            lastInputWasAction = false;
-            lastInputWasEqual = false;
-        });
-        button1.setFocusable(false);
+        JButton button1 = new JButton("1");
+        numKeyAction(field, button1);
 
-        JButton button2 = new JButton(" 2 ");
-        button2.addActionListener(evt -> {
-            if(lastInputWasAction){
-                field.setText("");
-            }
-            if(lastInputWasEqual){
-                field.setText("");
-                int_1 = Double.NaN;
-                int_2 = Double.NaN;
-                action = "none";
-                hasBeenSolved = true;
-            }
-            if(field.getText().equals("0")){
-                field.setText("");
-            }
-            field.setText(field.getText().concat("2"));
-            lastInputWasAction = false;
-            lastInputWasEqual = false;
-        });
-        button2.setFocusable(false);
+        JButton button2 = new JButton("2");
+        numKeyAction(field, button2);
 
-        JButton button3 = new JButton(" 3 ");
-        button3.addActionListener(evt -> {
-            if(lastInputWasAction){
-                field.setText("");
-            }
-            if(lastInputWasEqual){
-                field.setText("");
-                int_1 = Double.NaN;
-                int_2 = Double.NaN;
-                action = "none";
-                hasBeenSolved = true;
-            }
-            if(field.getText().equals("0")){
-                field.setText("");
-            }
-            field.setText(field.getText().concat("3"));
-            lastInputWasAction = false;
-            lastInputWasEqual = false;
-        });
-        button3.setFocusable(false);
+        JButton button3 = new JButton("3");
+        numKeyAction(field, button3);
 
-        JButton button5 = new JButton(" 4 ");
-        button5.addActionListener(evt -> {
-            if(lastInputWasAction){
-                field.setText("");
-            }
-            if(lastInputWasEqual){
-                field.setText("");
-                int_1 = Double.NaN;
-                int_2 = Double.NaN;
-                action = "none";
-                hasBeenSolved = true;
-            }
-            if(field.getText().equals("0")){
-                field.setText("");
-            }
-            field.setText(field.getText().concat("4"));
-            lastInputWasAction = false;
-            lastInputWasEqual = false;
-        });
-        button5.setFocusable(false);
+        JButton button4 = new JButton("4");
+        numKeyAction(field, button4);
 
-        JButton button6 = new JButton(" 5 ");
-        button6.addActionListener(evt -> {
-            if(lastInputWasAction){
-                field.setText("");
-            }
-            if(lastInputWasEqual){
-                field.setText("");
-                int_1 = Double.NaN;
-                int_2 = Double.NaN;
-                action = "none";
-                hasBeenSolved = true;
-            }
-            if(field.getText().equals("0")){
-                field.setText("");
-            }
-            field.setText(field.getText().concat("5"));
-            lastInputWasAction = false;
-            lastInputWasEqual = false;
-        });
-        button6.setFocusable(false);
+        JButton button5 = new JButton("5");
+        numKeyAction(field, button5);
 
-        JButton button7 = new JButton(" 6 ");
-        button7.addActionListener(evt -> {
-            if(lastInputWasAction){
-                field.setText("");
-            }
-            if(lastInputWasEqual){
-                field.setText("");
-                int_1 = Double.NaN;
-                int_2 = Double.NaN;
-                action = "none";
-                hasBeenSolved = true;
-            }
-            if(field.getText().equals("0")){
-                field.setText("");
-            }
-            field.setText(field.getText().concat("6"));
-            lastInputWasAction = false;
-            lastInputWasEqual = false;
-        });
-        button7.setFocusable(false);
+        JButton button6 = new JButton("6");
+        numKeyAction(field, button6);
 
 
-        JButton button9 = new JButton(" 7 ");
-        button9.addActionListener(evt -> {
-            if(lastInputWasAction){
-                field.setText("");
-            }
-            if(lastInputWasEqual){
-                field.setText("");
-                int_1 = Double.NaN;
-                int_2 = Double.NaN;
-                action = "none";
-                hasBeenSolved = true;
-            }
-            if(field.getText().equals("0")){
-                field.setText("");
-            }
-            field.setText(field.getText().concat("7"));
-            lastInputWasAction = false;
-            lastInputWasEqual = false;
-        });
-        button9.setFocusable(false);
+        JButton button7 = new JButton("7");
+        numKeyAction(field, button7);
 
-        JButton button10 = new JButton(" 8 ");
-        button10.addActionListener(evt -> {
-            if(lastInputWasAction) {
-                field.setText("");
-            }
-            if(lastInputWasEqual){
-                field.setText("");
-                int_1 = Double.NaN;
-                int_2 = Double.NaN;
-                action = "none";
-                hasBeenSolved = true;
-            }
+        JButton button8 = new JButton("8");
+        numKeyAction(field, button8);
 
-            if(field.getText().equals("0")){
-                field.setText("");
-            }
-            field.setText(field.getText().concat("8"));
-            lastInputWasAction = false;
-            lastInputWasEqual = false;
-        });
-        button10.setFocusable(false);
+        JButton button9 = new JButton("9");
+        numKeyAction(field, button9);
 
-        JButton button11 = new JButton(" 9 ");
-        button11.addActionListener(e -> {
-            if(lastInputWasAction || lastInputWasEqual){
-                field.setText("");
-            }
-            if(field.getText().equals("0")){
-                field.setText("");
-            }
-            field.setText(field.getText().concat("9"));
-            lastInputWasAction = false;
-            lastInputWasEqual = false;
-        });
-        button11.setFocusable(false);
-
-        JButton button13 = new JButton(" 0 ");
-        button13.addActionListener(e -> {
+        JButton buttonZero = new JButton("0");
+        buttonZero.addActionListener(e -> {
             if(lastInputWasAction){
                 field.setText("");
             }
@@ -246,17 +86,17 @@ public class Calculator {
                 hasBeenSolved = true;
             }
             if(!field.getText().startsWith("0")) {
-                field.setText(field.getText().concat("0"));
+                field.setText(field.getText().concat(buttonZero.getText()));
             }
             lastInputWasAction = false;
             lastInputWasEqual = false;
         });
-        button13.setFocusable(false);
+        buttonZero.setFocusable(false);
 
         // EQUATION BUTTON
 
-        JButton button14 = new JButton(" = ");
-        button14.addActionListener(e -> {
+        JButton buttonEquals = new JButton("=");
+        buttonEquals.addActionListener(e -> {
             if (lastInputWasEqual) {
                 int_1 = Double.parseDouble(field.getText());
             } else {
@@ -264,26 +104,17 @@ public class Calculator {
             }
 
             switch (action) {
-                case "+":
-                    total = int_1 + int_2;
-                    break;
-                case "-":
-                    total = int_1 - int_2;
-                    break;
-                case "*":
-                    total = int_1 * int_2;
-                    break;
-                case "/":
-                    System.out.println("ALOOO");
+                case "+" -> total = int_1 + int_2;
+                case "-" -> total = int_1 - int_2;
+                case "*" -> total = int_1 * int_2;
+                case "/" -> {
                     if (int_2 != 0) {
                         total = int_1 / int_2;
                     } else {
                         dividingByZero = true;
                     }
-                    break;
-                case "none":
-                    total = Double.parseDouble(field.getText());
-                    break;
+                }
+                case "none" -> total = Double.parseDouble(field.getText());
             }
             if ((total % 1) == 0) {
                 answer = String.valueOf((int) total);
@@ -300,123 +131,39 @@ public class Calculator {
             lastInputWasAction = false;
             hasBeenSolved = true;
         });
-        button14.setFocusable(false);
+        buttonEquals.setFocusable(false);
 
-        JButton button15 = new JButton(" C ");
-        button15.addActionListener(e -> {
+        JButton buttonClear = new JButton("C");
+        buttonClear.addActionListener(e -> {
             int_1 = Double.NaN;
             int_2 = Double.NaN;
             field.setText("0");
             action = "none";
             hasBeenSolved = true;
         });
-        button15.setFocusable(false);
+        buttonClear.setFocusable(false);
 
         // MATH OPERATION BUTTONS
 
-        JButton button4 = new JButton(" + ");
-        button4.addActionListener(e -> {
-            if(action=="+" && lastInputWasAction){
-                return;
-            }
-            if (!hasBeenSolved && !lastInputWasAction) {
-                button14.doClick();
-                hasBeenSolved = true;
-            }
-            int_1 = Double.parseDouble(field.getText());
-            action = "+";
-            if(!lastInputWasAction) {
-                hasBeenSolved = false;
-            }
-            lastInputWasEqual = false;
-            lastInputWasAction = true;
-        });
-        button4.setFocusable(false);
+        JButton buttonAdd = new JButton("+");
+        mathKeyAction(field, buttonEquals, buttonAdd);
 
+        JButton buttonSubtract = new JButton("-");
+        mathKeyAction(field, buttonEquals, buttonSubtract);
 
-        JButton button8 = new JButton(" - ");
-        button8.addActionListener(e -> {
-            if(action=="-" && lastInputWasAction){
-                return;
-            }
-            if (!hasBeenSolved && !lastInputWasAction) {
-                button14.doClick();
-                hasBeenSolved = true;
-            }
+        JButton buttonMultiplicative = new JButton("*");
+        mathKeyAction(field, buttonEquals, buttonMultiplicative);
 
-            int_1 = Double.parseDouble(field.getText());
-            action = "-";
-
-            if(!lastInputWasAction) {
-                hasBeenSolved = false;
-            }
-            lastInputWasEqual = false;
-            lastInputWasAction = true;
-        });
-        button8.setFocusable(false);
-
-        JButton button12 = new JButton(" * ");
-        button12.addActionListener(e -> {
-            if(action=="*" && lastInputWasAction){
-                return;
-            }
-            if (!hasBeenSolved && !lastInputWasAction) {
-                button14.doClick();
-                hasBeenSolved = true;
-            }
-            int_1 = Double.parseDouble(field.getText());
-            action="*";
-            if(!lastInputWasAction) {
-                hasBeenSolved = false;
-            }
-            lastInputWasEqual = false;
-            lastInputWasAction = true;
-
-        });
-        button12.setFocusable(false);
-
-        JButton button16 = new JButton(" / ");
-        button16.addActionListener(e -> {
-            if(action=="/" && lastInputWasAction){
-                return;
-            }
-            if (!hasBeenSolved && !lastInputWasAction) {
-                button14.doClick();
-                hasBeenSolved = true;
-            }
-            int_1 = Double.parseDouble(field.getText());
-            action="/";
-            if(!lastInputWasAction) {
-                hasBeenSolved = false;
-            }
-            lastInputWasEqual = false;
-            lastInputWasAction = true;
-        });
-        button16.setFocusable(false);
-
-
+        JButton buttonDivision = new JButton("/");
+        mathKeyAction(field, buttonEquals, buttonDivision);
 
 
 //        for (int index = 1; index <= 16; index++) {
 //            panel.add(button(index));
 //        }
 
-        panel.add(button1);
-        panel.add(button2);
-        panel.add(button3);
-        panel.add(button4);
-        panel.add(button5);
-        panel.add(button6);
-        panel.add(button7);
-        panel.add(button8);
-        panel.add(button9);
-        panel.add(button10);
-        panel.add(button11);
-        panel.add(button12);
-        panel.add(button13);
-        panel.add(button14);
-        panel.add(button15);
-        panel.add(button16);
+        buttonToPanel(panel, button1, button2, button3, button4, button5, button6, buttonAdd, buttonSubtract);
+        buttonToPanel(panel, button7, button8, button9, buttonZero, buttonEquals, buttonClear, buttonMultiplicative, buttonDivision);
 
 
         // MAIN FRAME
@@ -436,6 +183,59 @@ public class Calculator {
         frame.add(panel);
     }
 
+    private static void buttonToPanel(JPanel panel, JButton button1, JButton button2, JButton button3, JButton button4, JButton button5, JButton button6, JButton buttonAdd, JButton buttonSubtract) {
+        panel.add(button1);
+        panel.add(button2);
+        panel.add(button3);
+        panel.add(buttonAdd);
+        panel.add(button4);
+        panel.add(button5);
+        panel.add(button6);
+        panel.add(buttonSubtract);
+    }
+
+    private static void mathKeyAction(JTextField field, JButton buttonEquals, JButton buttonAdd) {
+        buttonAdd.addActionListener(e -> {
+            if(Objects.equals(action, buttonAdd.getText()) && lastInputWasAction){
+                return;
+            }
+            if (!hasBeenSolved && !lastInputWasAction) {
+                buttonEquals.doClick();
+                hasBeenSolved = true;
+            }
+            int_1 = Double.parseDouble(field.getText());
+            action = buttonAdd.getText();
+            if(!lastInputWasAction) {
+                hasBeenSolved = false;
+            }
+            lastInputWasEqual = false;
+            lastInputWasAction = true;
+        });
+        buttonAdd.setFocusable(false);
+    }
+
+    private static void numKeyAction(JTextField field, JButton button) {
+        button.addActionListener(evt -> {
+            if(lastInputWasAction){
+                field.setText("");
+            }
+            if(lastInputWasEqual){
+                field.setText("");
+                int_1 = Double.NaN;
+                int_2 = Double.NaN;
+                action = "none";
+                hasBeenSolved = true;
+            }
+            if(field.getText().equals("0")){
+                field.setText("");
+            }
+            field.setText(field.getText().concat(button.getText()));
+            lastInputWasAction = false;
+            lastInputWasEqual = false;
+        });
+        button.setFocusable(false);
+    }
+
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -443,10 +243,9 @@ public class Calculator {
         });
     }
 
-    protected static JButton createButton(int index) {
-        JButton btn = new JButton(" "+String.valueOf(index)+" ");
-        btn.setFocusable(false);
-//        btn.addActionListener(buttonActionHandler);
-        return btn;
-    }
+//    protected static JButton createButton(int index, JTextField txtField) {
+//        JButton btn = new JButton(String.valueOf(index));
+//        numKeyAction(txtField, btn);
+//        return btn;
+//    }
 }
