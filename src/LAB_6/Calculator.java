@@ -28,7 +28,7 @@ public class Calculator {
         GridBagConstraints gbc = new GridBagConstraints();           // Creates a GridBagConstraint object
         gbc.gridwidth = GridBagConstraints.REMAINDER;                // Specifies that this component is the last component in its column or row.
         JTextField field = new JTextField(12);               // Creates JTextField for 12 long characters
-        field.setFont(new Font("Calabi", Font.BOLD, 24));  // Font settings
+        field.setFont(new Font("Arial", Font.BOLD, 24));  // Font settings
         field.setHorizontalAlignment(JTextField.RIGHT);              // Set text adjust to right side of screen
         field.setEditable(false);                                 // Disabling Input from Keyboard
         field.setText("0");                                         // Setting text on screen
@@ -88,6 +88,8 @@ public class Calculator {
             lastInputWasEqual = false;                  // last input was number -> NOT equal -> false
         });
         buttonZero.setFocusable(false);                 // removing this weird frame after button click
+        buttonZero.setFont(new Font("Calabi", Font.PLAIN, 23));
+
 
         // EQUATION BUTTON
         JButton buttonEquals = new JButton("=");            // creating new Object
@@ -127,6 +129,8 @@ public class Calculator {
             hasBeenSolved = true;                               // last input was number -> task solved -> true
         });
         buttonEquals.setFocusable(false);                       // removing this weird frame after button click
+        buttonEquals.setFont(new Font("Calabi", Font.PLAIN, 23));
+
 
         JButton buttonClear = new JButton("C");
         buttonClear.addActionListener(e -> {
@@ -137,6 +141,7 @@ public class Calculator {
             hasBeenSolved = true;                               // setting default value of hasBeenSolved
         });
         buttonClear.setFocusable(false);                        // removing this weird frame after button click
+        buttonClear.setFont(new Font("Calabi", Font.BOLD, 23));
 
         // MATH OPERATION BUTTONS
 
@@ -191,11 +196,12 @@ public class Calculator {
             lastInputWasEqual = false;                  // last input was number -> NOT equal -> false
         });
         button.setFocusable(false);                     // removing this weird frame after button click
+        button.setFont(new Font("Calabi", Font.PLAIN, 23));
     }
 
-    private static void mathKeyAction(JTextField field, JButton buttonEquals, JButton buttonAdd) {
-        buttonAdd.addActionListener(e -> {
-            if (Objects.equals(action, buttonAdd.getText()) && lastInputWasAction) {
+    private static void mathKeyAction(JTextField field, JButton buttonEquals, JButton button) {
+        button.addActionListener(e -> {
+            if (Objects.equals(action, button.getText()) && lastInputWasAction) {
                 return;                                         // check if same action button was pressed again
             }                                                   // if TRUE do nothing -> return
             if (!hasBeenSolved && !lastInputWasAction) {        // check if its situation 12 + 4 <CURRENTLY PRESSED BUTTON>
@@ -203,14 +209,15 @@ public class Calculator {
                 hasBeenSolved = true;                           // previous task solved -> true
             }
             int_1 = Double.parseDouble(field.getText());        // set variable
-            action = buttonAdd.getText();                       // set current operation
+            action = button.getText();                       // set current operation
             if (!lastInputWasAction) {                          // check if last button pressed was operator
                 hasBeenSolved = false;                          // if FALSE task is NOT solved -> operator OVERRIDE
             }
             lastInputWasEqual = false;                          // last input was action -> NOT equal -> false
             lastInputWasAction = true;                          // last input was action -> action -> true
         });
-        buttonAdd.setFocusable(false);                          // removing this weird frame after button click
+        button.setFocusable(false);                          // removing this weird frame after button click
+        button.setFont(new Font("Calabi", Font.PLAIN, 23));
     }
 
 
