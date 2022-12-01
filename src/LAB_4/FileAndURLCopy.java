@@ -13,15 +13,19 @@ java -classpath C:\Users\mmkwa\IdeaProjects\java_studia\out\production\objectpro
 
 public class FileAndURLCopy {
     public static void main(String[] args) throws IOException {
-        if (args.length < 2) {
+        if (args.length < 1) {
             System.out.println("Brak argumentów programu.\n" + "Użycie: java FileCopy <source file> <destanation>");
             System.exit(0);
         }
 
         String sourceFileLocation = args[0];
-        String destanationFileLocation = args[1];
+        String destanationFileLocation;
+        if(args.length == 1){
+            destanationFileLocation = args[0].replace(":","").replace("/","")+".html";
+        }else {
+            destanationFileLocation = args[1];
+        }
         Path pathOut = Paths.get(destanationFileLocation);
-
         File src = new File(sourceFileLocation), dst = new File(destanationFileLocation);
 
         if (!isValidURL(args[0])) { // Jest plikiem:
