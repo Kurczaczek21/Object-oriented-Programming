@@ -1,6 +1,7 @@
 package LAB_6;
                                                 // Simple Calculator app
 import javax.swing.*;                           // ver 1.0
+import javax.swing.border.EmptyBorder;
 import java.awt.*;                              // Credits to Mateusz Warzecha
 import java.util.Objects;                       // github:
                                                 // https://github.com/Kurczaczek21/
@@ -28,16 +29,17 @@ public class Calculator {
         GridBagConstraints gbc = new GridBagConstraints();           // Creates a GridBagConstraint object
         gbc.gridwidth = GridBagConstraints.REMAINDER;                // Specifies that this component is the last component in its column or row.
         JTextField field = new JTextField(12);               // Creates JTextField for 12 long characters
-        field.setFont(new Font("Arial", Font.BOLD, 24));  // Font settings
+        field.setFont(new Font("Arial", Font.BOLD, 28));  // Font settings
         field.setHorizontalAlignment(JTextField.RIGHT);              // Set text adjust to right side of screen
         field.setEditable(false);                                 // Disabling Input from Keyboard
         field.setText("0");                                         // Setting text on screen
-
+        field.setBorder(new EmptyBorder(5,10,5,10)); //visual settings
 
         // BUTTON PANEL
         JPanel panel = new JPanel();                                    // Creates new JPanel
         panel.setPreferredSize(new Dimension(300, 150));     // Set Panel size
         panel.setBackground(Color.lightGray);                           // Set background colour
+        panel.setBorder(new EmptyBorder(10,10,10,10)); // visual settings
         panel.setLayout(new GridLayout(4, 4, 6, 6));  // Set mesh layout for buttons on panel
 
 
