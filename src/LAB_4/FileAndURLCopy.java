@@ -20,7 +20,7 @@ public class FileAndURLCopy {
 
         String sourceFileLocation = args[0];
         String destanationFileLocation;
-        if(args.length == 1){
+        if(args.length == 1 && isValidURL(args[0])){
             destanationFileLocation = args[0].replace(":","").replace("/","")+".html";
         }else {
             destanationFileLocation = args[1];
